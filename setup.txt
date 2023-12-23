@@ -1,0 +1,9 @@
+ejs setup steps
+
+1. ejs install 
+npm i ejs
+2. congigure
+app.set("view engine","ejs")
+3.ek views folder bna lo
+4.usme ejs file bnao fir
+5.send ki jagah render kar do
