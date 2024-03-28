@@ -1,9 +1,6 @@
-ejs setup steps
-
-1. ejs install 
-npm i ejs
-2. congigure
-app.set("view engine","ejs")
-3.ek views folder bna lo
-4.usme ejs file bnao fir
-5.send ki jagah render kar do
+step 1: create a folder 
+step 2: move into that folder 
+step 3: npm init -y in terminal
+step 4: open folder in vs code
+step 5: npm i express
+step 6:index or server.js
