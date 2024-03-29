@@ -24,3 +24,4 @@ const todoSchema = new mongoose.Schema({
 });
 
 module.exports = mongoose.model("second", todoSchema);
+//schema of the DB 

@@ -1,11 +1,12 @@
+//import schema or model 
 const Todo = require("../modals/todo.js");
+
 
 exports.createTodo = async (req, res) => {
     try {
-        const { title, description } = req.body;
-
-        const response = await Todo.create({ title, description });
-
+        const { title, description } = req.body;//data fetch 
+        const response = await Todo.create({ title, description });//create method called and pass value in Todo and store in response 
+        
         res.status(200).json({
             success: true,
             data: response,

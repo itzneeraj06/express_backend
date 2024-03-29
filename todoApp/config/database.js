@@ -1,5 +1,11 @@
+// configure mongoose first install mongoose
 const mongoose = require("mongoose"); 
+
+//configure dotenv package => npm i dotenv
+//direct access of .env file var 
 require("dotenv").config();
+
+//db connection call a connect method and pass url of Db
 const  dbConnect = async() => {
     return await mongoose.connect(process.env.DATABASE_URL, { 
         useNewUrlParser: true,

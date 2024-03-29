@@ -1,9 +1,10 @@
+// configure express
 const express = require('express');
 const app = express();
 
-//define port 
+
 require("dotenv").config();
-const PORT =3000;//problem from .env file import 
+const PORT =3000;
 
 //fetch data from body 
 app.use(express.json());
@@ -12,9 +13,11 @@ app.use(express.json());
 const dbConnect = require("./config/database.js");
 dbConnect();
 
-//api route define and call controller 
+
+//for better understanding 
 const todoRoutes = require("./route/todos.js");
 app.use("/api/v1", todoRoutes);
+
 
 //start server
 app.listen(PORT, () => {
