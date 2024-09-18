@@ -64,7 +64,8 @@ exports.checkbooking = async (req, res) => {
 exports.updatebooking = async (req, res) => {
     try {
         const { id } = req.headers;
-        const { booking, paid } = req.body;
+        const { bookingid } = req.params;
+        const { paid } = req.body;
 
         const user = await User.findById(id);
         if (!user) {
@@ -74,7 +75,7 @@ exports.updatebooking = async (req, res) => {
             console.log(user.role);
             return res.status(400).json({ message: "access denied please login" })
         }
-        const bookingdata = await Booking.findByIdAndUpdate(booking, {
+        const bookingdata = await Booking.findByIdAndUpdate(bookingid, {
             paid: paid
         });
 

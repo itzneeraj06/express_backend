@@ -33,7 +33,10 @@ exports.updatecourt = async (req, res) => {
 
     try {
         const { id } = req.headers;
-        const { courtname, location, sports, price, court } = req.body;
+        const { courtid } = req.params;
+        const { courtname, location, sports, price } = req.body;
+
+        console.log(courtid);
 
         const user = await User.findById(id);
         if (!user) {
@@ -43,7 +46,7 @@ exports.updatecourt = async (req, res) => {
             console.log(user.role);
             return res.status(400).json({ message: "access denied please login" })
         }
-        const updateddata = await Court.findByIdAndUpdate(court, {
+        const updateddata = await Court.findByIdAndUpdate(courtid, {
             courtname,
             location,
             sports,
@@ -61,7 +64,7 @@ exports.updatecourt = async (req, res) => {
 }
 exports.getcourtdetails = async (req, res) => {
     try {
-        const court = await courts.find();
+        const court = await Court.find().select("-booking").select("-matchhistory").select("-customers");
         const newlyadded = court.reverse();
         return res.json({
             status: "success",
@@ -69,5 +72,27 @@ exports.getcourtdetails = async (req, res) => {
         })
     } catch (error) {
         return res.status(500).json({ message: "failed to fetch all books" })
+    }
+}
+exports.getcourt = async (req, res) => {
+    try {
+        const { id } = req.headers;
+        const { courtid } = req.params;
+        const user = await User.findById(id);
+        if (!user) {
+            return res.status(400).json({ message: "Invalid user ID" });
+        }
+        if (user.role !== "admin") {
+            return res.status(400).json({ message: "access denied admin routes" })
+        }
+        const courtbyid = await Court.findById(courtid);
+
+        return res.status(200).json({
+            data: courtbyid
+        })
+    } catch (error) {
+        return res.status(500).json({
+            message: "failed to fetch check obj id"
+        })
     }
 }
